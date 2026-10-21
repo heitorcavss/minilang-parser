@@ -11,3 +11,5 @@ out/
 # Sistema operacional
 .DS_Store
 Thumbs.db
+# Anotacoes pessoais
+ANOTACOES.md

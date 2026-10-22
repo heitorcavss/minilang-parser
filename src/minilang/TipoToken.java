@@ -4,10 +4,10 @@ public enum TipoToken {
     // palavras reservadas
     OI,
     TCHAU,
-    INT,
-    DOUBLE,
-    IF,
-    ELSE,
+    INTEIRO,
+    DCIMAL,
+    SE,
+    SENN,
 
     // ids e numero
     ID,

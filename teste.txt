@@ -1,0 +1,8 @@
+oi
+inteiro x = 5;
+dcimal y;
+dcimal z;
+se (x == x) { } senn { }
+se (x > 5) { } senn { }
+se (x !=2) { } senn { }
+tchau

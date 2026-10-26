@@ -12,6 +12,7 @@ public enum TipoToken {
     // ids e numero
     ID,
     NUM,
+    NUM_DECIMAL,
 
     // delimitadores
     ABRE_PAREN,     // (

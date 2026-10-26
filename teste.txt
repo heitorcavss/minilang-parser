@@ -1,8 +1,6 @@
 oi
 inteiro x = 5;
-dcimal y;
-dcimal z;
-se (x == x) { } senn { }
-se (x > 5) { } senn { }
-se (x !=2) { } senn { }
+dcimal preco = 19.90;
+dcimal altura = 1.75;
+se (preco > x) { } senn { }
 tchau

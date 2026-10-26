@@ -65,17 +65,50 @@ public class Lexer {
     }
 
     // Por enquanto so inteiros.
-    private Token lerNumero(){
+    private Token lerNumero() throws ErroSintatico {
         int inicio = pos;
         int colunaInicio = coluna;
+        boolean decimal = false;
 
-        while (pos < texto.length() && Character.isDigit(texto.charAt(pos))) {
+        // Lê a parte inteira do número
+        while (pos < texto.length() &&
+                Character.isDigit(texto.charAt(pos))) {
             pos++;
             coluna++;
         }
 
+        // Verifica se existe uma parte decimal
+        if (pos < texto.length() && texto.charAt(pos) == '.') {
+            decimal = true;
+
+            pos++;
+            coluna++;
+
+            // Exige ao menos um dígito após o ponto
+            if (pos >= texto.length() ||
+                    !Character.isDigit(texto.charAt(pos))) {
+                throw new ErroSintatico(
+                        "esperava um dígito após o ponto decimal",
+                        linha,
+                        coluna
+                );
+            }
+
+            // Lê os dígitos após o ponto
+            while (pos < texto.length() &&
+                    Character.isDigit(texto.charAt(pos))) {
+                pos++;
+                coluna++;
+            }
+        }
+
         String numero = texto.substring(inicio, pos);
-        return new Token(TipoToken.NUM, numero, linha, colunaInicio);
+
+        TipoToken tipo = decimal
+                ? TipoToken.NUM_DECIMAL
+                : TipoToken.NUM;
+
+        return new Token(tipo, numero, linha, colunaInicio);
     }
 
     private Token lerSimbolo() throws ErroSintatico{

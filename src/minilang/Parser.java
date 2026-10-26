@@ -37,11 +37,13 @@ public class Parser {
         }
     }
 
-    private void valor() throws ErroSintatico{
-        if (atual().getTipo() == TipoToken.ID || atual().getTipo() == TipoToken.NUM){
+    private void valor() throws ErroSintatico {
+        TipoToken tipo = atual().getTipo();
+
+        if (tipo == TipoToken.ID || tipo == TipoToken.NUM || tipo == TipoToken.NUM_DECIMAL) {
             pos++;
         } else {
-            throw new ErroSintatico("esperava identificador ou número mas encontrou " + encontrado(), atual().getLinha(), atual().getColuna());
+            throw new ErroSintatico("esperava identificador ou número mas encontrou " + encontrado(),atual().getLinha(),atual().getColuna());
         }
     }
 

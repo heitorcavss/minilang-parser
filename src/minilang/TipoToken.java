@@ -9,7 +9,7 @@ public enum TipoToken {
     SE,
     SENN,
 
-    // ids e numero
+    // ids e numeros
     ID,
     NUM,
     NUM_DECIMAL,

@@ -64,7 +64,6 @@ public class Lexer {
         return new Token(tipoDaPalavra(palavra), palavra, linha, colunaInicio);
     }
 
-    // Por enquanto so inteiros.
     private Token lerNumero() throws ErroSintatico {
         int inicio = pos;
         int colunaInicio = coluna;
@@ -104,9 +103,7 @@ public class Lexer {
 
         String numero = texto.substring(inicio, pos);
 
-        TipoToken tipo = decimal
-                ? TipoToken.NUM_DECIMAL
-                : TipoToken.NUM;
+        TipoToken tipo = decimal ? TipoToken.NUM_DECIMAL : TipoToken.NUM;
 
         return new Token(tipo, numero, linha, colunaInicio);
     }

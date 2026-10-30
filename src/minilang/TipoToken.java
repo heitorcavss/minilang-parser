@@ -8,6 +8,7 @@ public enum TipoToken {
     DCIMAL,
     SE,
     SENN,
+    ENQUANTO,
 
     // ids e numeros
     ID,
@@ -39,3 +40,6 @@ public enum TipoToken {
     // Fim da lista de tokens
     FIM
 }
+
+
+// FIM != TCHAU. Podem haver coisas após o TCHAU, mas deve ser sinalizado pelo interpretador pois estaria fora do "escopo do programa.

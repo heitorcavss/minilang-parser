@@ -48,6 +48,9 @@ public class Lexer {
         if (palavra.equals("senn")) {
             return TipoToken.SENN;
         }
+        if (palavra.equals("enquanto")) {
+            return TipoToken.ENQUANTO;
+        }
         return TipoToken.ID;
     }
 

@@ -80,16 +80,36 @@ public class Parser {
         consumir(TipoToken.PONTO_VIRGULA, "';'");
     }
 
+    private void bloco() throws ErroSintatico{
+        consumir(TipoToken.ABRE_CHAVE, "'{'");
+
+        while (atual().getTipo() == TipoToken.SE || atual().getTipo() == TipoToken.ENQUANTO){
+            if (atual().getTipo() == TipoToken.SE){
+                ifElse();
+            } else {
+                whileLoop();
+            }
+        }
+
+        consumir(TipoToken.FECHA_CHAVE, "'}'");
+    }
+
+    private void whileLoop() throws ErroSintatico{
+        consumir(TipoToken.ENQUANTO, "'enquanto'");
+        consumir(TipoToken.ABRE_PAREN, "'('");
+        condicao();
+        consumir(TipoToken.FECHA_PAREN, "')'");
+        bloco();
+    }
+
     private void ifElse() throws ErroSintatico{
         consumir(TipoToken.SE, "'se'");
         consumir(TipoToken.ABRE_PAREN, "'('");
         condicao();
         consumir(TipoToken.FECHA_PAREN, "')'");
-        consumir(TipoToken.ABRE_CHAVE, "'{'");
-        consumir(TipoToken.FECHA_CHAVE, "'}'");
+        bloco();
         consumir(TipoToken.SENN, "'senn'");
-        consumir(TipoToken.ABRE_CHAVE, "'{'");
-        consumir(TipoToken.FECHA_CHAVE, "'}'");
+        bloco();
     }
 
     private void programa() throws ErroSintatico{
@@ -106,6 +126,7 @@ public class Parser {
         }
 
         consumir(TipoToken.TCHAU, "'tchau'");
+        //if alguma coisa -> exception 'fora do escopo do programa. lx cy'
         consumir(TipoToken.FIM, "fim do arquivo");
     }
 

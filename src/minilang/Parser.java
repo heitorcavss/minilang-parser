@@ -95,6 +95,10 @@ public class Parser {
             comando();
         }
 
+        if (atual().getTipo() == TipoToken.INTEIRO || atual().getTipo() == TipoToken.DCIMAL){
+            throw new ErroSintatico("declaração não é permitida dentro de 'se' ou 'enquanto', apenas no bloco de declarações", atual().getLinha(), atual().getColuna());
+        }
+
         consumir(TipoToken.FECHA_CHAVE, "'}'");
     }
 
@@ -122,8 +126,6 @@ public class Parser {
         while (atual().getTipo() == TipoToken.INTEIRO || atual().getTipo() == TipoToken.DCIMAL){
             declaracao();
         }
-
-        ifElse();
 
         while (atual().getTipo() == TipoToken.SE || atual().getTipo() == TipoToken.ENQUANTO){
             comando();

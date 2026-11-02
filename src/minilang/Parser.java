@@ -1,14 +1,17 @@
 package minilang;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Parser {
     private ArrayList<Token> tokens;
     private int pos;
+    private HashSet<String> declaradas;
 
     public Parser(ArrayList<Token> tokens){
         this.tokens = tokens;
         this.pos = 0;
+        this.declaradas = new HashSet<>();
     }
 
     private Token atual(){
@@ -40,6 +43,10 @@ public class Parser {
     private void valor() throws ErroSintatico {
         TipoToken tipo = atual().getTipo();
 
+        if (tipo == TipoToken.ID && !declaradas.contains(atual().getTexto())) {
+            throw new ErroSintatico("variável '" + atual().getTexto() + "' não foi declarada", atual().getLinha(), atual().getColuna());
+        }
+
         if (tipo == TipoToken.ID || tipo == TipoToken.NUM || tipo == TipoToken.NUM_DECIMAL) {
             pos++;
         } else {
@@ -70,7 +77,12 @@ public class Parser {
 
     private void declaracao() throws ErroSintatico{
         tipo();
+        Token nome = atual();
         consumir(TipoToken.ID, "identificador");
+
+        if (declaradas.contains(nome.getTexto())){
+            throw new ErroSintatico("variável '" + nome.getTexto() + "' já foi declarada", nome.getLinha(), nome.getColuna());
+        }
 
         if (atual().getTipo() == TipoToken.ATRIBUICAO){
             consumir(TipoToken.ATRIBUICAO, "'='");
@@ -78,6 +90,7 @@ public class Parser {
         }
 
         consumir(TipoToken.PONTO_VIRGULA, "';'");
+        declaradas.add(nome.getTexto());
     }
 
     private void comando() throws ErroSintatico{

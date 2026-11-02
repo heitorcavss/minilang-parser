@@ -80,15 +80,19 @@ public class Parser {
         consumir(TipoToken.PONTO_VIRGULA, "';'");
     }
 
+    private void comando() throws ErroSintatico{
+        if (atual().getTipo() == TipoToken.SE){
+            ifElse();
+        } else {
+            whileLoop();
+        }
+    }
+
     private void bloco() throws ErroSintatico{
         consumir(TipoToken.ABRE_CHAVE, "'{'");
 
         while (atual().getTipo() == TipoToken.SE || atual().getTipo() == TipoToken.ENQUANTO){
-            if (atual().getTipo() == TipoToken.SE){
-                ifElse();
-            } else {
-                whileLoop();
-            }
+            comando();
         }
 
         consumir(TipoToken.FECHA_CHAVE, "'}'");
@@ -121,8 +125,8 @@ public class Parser {
 
         ifElse();
 
-        while (atual().getTipo() == TipoToken.SE){
-            ifElse();
+        while (atual().getTipo() == TipoToken.SE || atual().getTipo() == TipoToken.ENQUANTO){
+            comando();
         }
 
         consumir(TipoToken.TCHAU, "'tchau'");

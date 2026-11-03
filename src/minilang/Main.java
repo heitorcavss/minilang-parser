@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args){
-        String caminho = "teste.txt";
+        String caminho = "testes/erro/03_variavel_nao_declarada_na_condicao.txt";
 
         try {
             String texto = Files.readString(Path.of(caminho));

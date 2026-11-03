@@ -145,8 +145,10 @@ public class Parser {
         }
 
         consumir(TipoToken.TCHAU, "'tchau'");
-        //if alguma coisa -> exception 'fora do escopo do programa. lx cy'
-        consumir(TipoToken.FIM, "fim do arquivo");
+
+        if (atual().getTipo() != TipoToken.FIM){
+            throw new ErroSintatico("código fora do escopo do programa: " + encontrado(), atual().getLinha(), atual().getColuna());
+        }
     }
 
     public void analisar() throws ErroSintatico{

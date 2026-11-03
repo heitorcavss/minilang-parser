@@ -1,0 +1,14 @@
+oi
+inteiro x = 5;
+enquanto (x < 10) {
+    se (x > 1) {
+        enquanto (x != 3) {
+            se (x == 5) {
+                enquanto (x <= 7) {
+                    se (x >= 2) { } senn { }
+                }
+            } senn { }
+        }
+    } senn { }
+}
+tchau

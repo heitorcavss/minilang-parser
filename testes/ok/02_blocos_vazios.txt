@@ -1,0 +1,8 @@
+oi
+inteiro x = 5;
+se (x > 1) {
+} senn {
+}
+enquanto (x < 10) {
+}
+tchau

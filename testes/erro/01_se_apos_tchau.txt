@@ -1,0 +1,4 @@
+oi
+inteiro x = 5;
+tchau
+se (x > x) { } senn { }
